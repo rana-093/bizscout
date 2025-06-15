@@ -7,7 +7,7 @@ import enum
 class User(Base):
     __tablename__ = "users"
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     email = Column(String(255), unique=True, index=True, nullable=False)
     username = Column(String(100), unique=True, index=True, nullable=False)
     full_name = Column(String(255), nullable=True)
@@ -20,7 +20,7 @@ class User(Base):
 
 class UsageEvent(Base):
     __tablename__ = "usage_events"
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
     usage_type = Column(String, nullable=False)
     usage_unit = Column(String, nullable=True, default='percentage')
@@ -30,7 +30,7 @@ class UsageEvent(Base):
 
 class ReportJob(Base):
     __tablename__ = "report_jobs"
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
     status = Column(String, default="IN_PROGRESS")
     created_at = Column(DateTime(timezone=True), server_default=func.now())
@@ -46,7 +46,7 @@ class AggregationType(enum.Enum):
 
 class AggregatedSummary(Base):
     __tablename__ = "aggregated_summaries"
-    id = Column(String, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
     computed_result = Column(Float, nullable=False)
     aggregation_type = Column(SqlEnum(AggregationType), nullable=False)

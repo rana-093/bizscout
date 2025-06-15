@@ -28,7 +28,7 @@ services:
       - pgdata:/var/lib/postgresql/data
 
   redis:
-    image: redis:7
+    image: redis
     container_name: fastapi-redis
     ports:
       - "6379:6379"
@@ -36,7 +36,7 @@ services:
   celery:
     build: .
     container_name: fastapi-celery
-    command: celery -A celery_worker.celery_app worker --loglevel=info
+    command: celery -A config.celery_app worker --loglevel=info
     depends_on:
       - backend
       - redis

@@ -1,10 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <title>Usage Report</title>
+    <style>
+        table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
 </head>
 <body>
-$END$
+    <h1>Usage Report</h1>
+    <p>User ID: {{ report.user_id }}</p>
+    <p>Total Events: {{ report.total_events }}</p>
+    <p>Generated At: {{ report.generated_at }}</p>
+
+    <h2>Metrics</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Usage Type</th>
+                <th>Usage Unit</th>
+                <th>Total Usage</th>
+                <th>Avg Usage</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for metric in report.metrics %}
+            <tr>
+                <td>{{ metric.usage_type }}</td>
+                <td>{{ metric.usage_unit }}</td>
+                <td>{{ metric.total_usage }}</td>
+                <td>{{ metric.avg_usage }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Events</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Usage Type</th>
+                <th>Usage Amount</th>
+                <th>Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in report.events %}
+            <tr>
+                <td>{{ event.usage_type }}</td>
+                <td>{{ event.usage_amount }}</td>
+                <td>{{ event.created_at }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>
