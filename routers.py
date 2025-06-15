@@ -5,6 +5,7 @@ import crud, schemas
 from config.db import get_db
 
 usage_router = APIRouter(prefix="/usage", tags=["usage"])
+report_router = APIRouter(prefix="/reports", tags=["reports"])
 
 
 @usage_router.post("/")
@@ -18,3 +19,13 @@ def get_usage_events(user_id: int, db: Session = Depends(get_db)):
     if not events:
         raise HTTPException(status_code=404, detail="User not found or no events")
     return events
+
+
+@report_router.post("/{user_id}")
+def process_report(user_id: int, db: Session = Depends(get_db)):
+    return crud.process_new_job(db, user_id)
+
+
+@report_router.post("/status/{job_id}")
+def process_report(user_id: int, db: Session = Depends(get_db)):
+    return crud.get_job(db, user_id)

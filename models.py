@@ -23,15 +23,16 @@ class UsageEvent(Base):
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
     usage_type = Column(String, nullable=False)
+    usage_unit = Column(String, nullable=True, default='percentage')
     usage_amount = Column(Float, nullable=False)
     timestamp = Column(DateTime(timezone=True), server_default=func.now())
 
 
 class ReportJob(Base):
     __tablename__ = "report_jobs"
-    id = Column(String, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
-    status = Column(String, default="pending")
+    status = Column(String, default="IN_PROGRESS")
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     completed_at = Column(DateTime(timezone=True), nullable=True)
     report_path = Column(String, nullable=True)
