@@ -12,9 +12,9 @@ jobs:
       DATABASE_URL_SYNC: postgresql+psycopg2://test_user:test_pass@localhost:5432/test_db
       DATABASE_URL: postgresql+asyncpg://test_user:test_pass@localhost:5432/test_db
       SECRET_KEY: random
-      EMAIL_HOST: random
-      EMAIL_HOST_USER: random
-      EMAIL_HOST_PASSWORD: random
+      EMAIL_HOST: smtp.gmail.com
+      EMAIL_HOST_USER: noreply@yopmail.com
+      EMAIL_HOST_PASSWORD: random1234
       EMAIL_PORT: 587
 
     services:
