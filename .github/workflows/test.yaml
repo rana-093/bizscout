@@ -15,7 +15,7 @@ jobs:
       EMAIL_HOST: random
       EMAIL_HOST_USER: random
       EMAIL_HOST_PASSWORD: random
-      EMAIL_PORT: random
+      EMAIL_PORT: 587
 
     services:
       postgres:
