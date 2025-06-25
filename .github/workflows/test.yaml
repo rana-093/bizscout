@@ -16,6 +16,8 @@ jobs:
       EMAIL_HOST_USER: noreply@yopmail.com
       EMAIL_HOST_PASSWORD: random1234
       EMAIL_PORT: 587
+      REDIS_URL: redis://localhost:6379/0  # ✅ Add your broker URL here if using Celery
+
 
     services:
       postgres:
@@ -31,6 +33,16 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+      
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5    
 
     steps:
     - uses: actions/checkout@v3
